@@ -1,0 +1,134 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: background-color 1s ease;
+}
+
+/* Container */
+.container {
+    text-align: center;
+    color: white;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Welcome Text */
+.welcome-text {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    animation: slideInFromLeft 1.5s ease-out;
+}
+
+/* Description */
+.description {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #f2f2f2;
+    animation: slideInFromRight 1.5s ease-out;
+}
+
+/* Dashboard Button */
+.dashboard-button {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: #4e54c8;
+    background: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    animation: bounceIn 2s ease-out;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-button:hover {
+    background: #8f94fb;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Background Image Animation */
+body {
+    background: url('https://source.unsplash.com/random/1600x900') no-repeat center center/cover;
+    animation: backgroundChange 30s infinite alternate;
+}
+
+/* Scroll Color Change */
+body.scrolled {
+    background-color: #2c3e50; /* Darker shade on scroll */
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes backgroundChange {
+    0% {
+        background: url('https://images.pexels.com/photos/1509582/pexels-photo-1509582.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
+    }
+    25% {
+        background: url('https://images.pexels.com/photos/12734294/pexels-photo-12734294.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
+    }
+    50% {
+        background: url('https://images.pexels.com/photos/19758089/pexels-photo-19758089/free-photo-of-a-church-on-top-of-a-mountain-surrounded-by-trees.jpeg?auto=compress&cs=tinysrgb&w=600') no-repeat center center/cover;
+    }
+    75% {
+        background: url('https://source.unsplash.com/random/1600x900?space') no-repeat center center/cover;
+    }
+    100% {
+        background: url('https://source.unsplash.com/random/1600x900?mountain') no-repeat center center/cover;
+    }
+}
