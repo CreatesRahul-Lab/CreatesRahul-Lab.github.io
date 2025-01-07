@@ -1,14 +1,12 @@
 import { preloadImages } from './utils.js'; // Import utility function to preload images
 
-
-
 const grid = document.querySelector('.grid'); // Select the container that holds all grid items
 const gridImages = grid.querySelectorAll('.grid__item-imgwrap'); // Select all elements with the class '.grid__item-imgwrap'
 
 const marqueeInner = document.querySelector('.mark > .mark__inner'); // Select the inner element of the marquee
 
 const textElement = document.querySelector('.text'); // Select the text element
-//var splitTextEl = new SplitText(textElement, {type: 'chars'}); // Split the text into individual characters for animation
+// var splitTextEl = new SplitText(textElement, {type: 'chars'}); // Comment this out to avoid trial error
 
 const gridFull = document.querySelector('.grid--full'); // Select the full grid container
 
@@ -98,15 +96,11 @@ const animateTextElement = () => {
       scrub: true,                       // Smooth scrub
     }
   })
-  .from(splitTextEl.chars, {
-    // Animate each character individually
+  .from(textElement, {
+    // Animate the text as a whole if SplitText is not being used
     ease: 'sine',
-    yPercent: 300,                       // Move characters from below the viewport
+    yPercent: 300,                       // Move the text from below the viewport
     autoAlpha: 0,                        // Start with opacity 0
-    stagger: {                           // Stagger the animation for each character
-      each: 0.04,                        // 0.04 seconds between each character's animation
-      from: 'center'                     // Animate characters from the center outward
-    }
   });
 };
 
@@ -155,39 +149,40 @@ const animateGridFull = () => {
 
 const animateCredits = () => {
   creditsTexts.forEach(creditsText => {
- //   const splitCredits = new SplitText(creditsText, { type: 'chars' }); // Split each credits text into characters
+    // Commented out SplitText for credits text
+    // const splitCredits = new SplitText(creditsText, { type: 'chars' }); // Split each credits text into characters
 
     // GSAP timeline for the credits animation
     gsap.timeline({
       scrollTrigger: {
-        trigger: creditsText,              // Trigger the animation for each credits element
-        start: 'top bottom',               // Start when the top of the element hits the bottom of the viewport
-        end: 'clamp(bottom top)',          // End when the bottom of the element hits the top of the viewport
-        scrub: true,                       // Smooth scrub as you scroll
+        trigger: creditsText,              // Trigger when the credits text enters the viewport
+        start: 'top bottom+=10%',          // Start when the top of the credits text is just 10% past the bottom of the viewport
+        end: 'bottom top',                 // End when the bottom of the credits text reaches the top of the viewport
+        scrub: true,                       // Smooth scrub
       }
     })
-    .fromTo(splitCredits.chars, {
-      x: (index) => index * 80 - ((splitCredits.chars.length * 80) / 2),  // Start with extra spacing between characters, centered
-    }, {
-      x: 0,                               // Animate the characters back to their original position
-      ease: 'sine'
+    .from(creditsText, {
+      opacity: 0,                         // Start with no opacity (hidden)
+      scale: 1.5,                         // Start with a larger scale
+      yPercent: 150,                      // Start with the text below the viewport
+      ease: 'sine',
+    })
+    .to(creditsText, {
+      opacity: 0,                         // Fade out after a delay
+      yPercent: -100,                     // Move out of view upwards
+      ease: 'sine.in',
+      delay: 2,                            // Add a 2-second delay before fading out
     });
   });
 };
 
-
-// Main initialization function
-const init = () => {
-  animateScrollGrid();    // Animate the grid items on scroll
-  animateMarquee();       // Animate the marquee on scroll
-  animateTextElement();   // Animate the split text on scroll
-  animateGridFull();      // Animate the full grid with staggered delay
-  animateCredits();       // Call the credits animation
-};
-
-// Preload images and initialize animations after the images have loaded
-preloadImages('.grid__item-img').then(() => {
-  document.body.classList.remove('loading'); // Remove the 'loading' class from the body
-  init(); // Initialize the animations
-  window.scrollTo(0, 0); // Scroll to the top of the page on load
+// Event listeners for triggering animations
+document.addEventListener('DOMContentLoaded', () => {
+  preloadImages().then(() => {
+    animateScrollGrid();  // Call to animate the grid items
+    animateMarquee();     // Call to animate the marquee
+    animateTextElement(); // Call to animate the text element
+    animateGridFull();    // Call to animate the full grid
+    animateCredits();     // Call to animate the credits
+  });
 });
