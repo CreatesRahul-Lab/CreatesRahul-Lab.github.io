@@ -6,7 +6,6 @@ const gridImages = grid.querySelectorAll('.grid__item-imgwrap'); // Select all e
 const marqueeInner = document.querySelector('.mark > .mark__inner'); // Select the inner element of the marquee
 
 const textElement = document.querySelector('.text'); // Select the text element
-// var splitTextEl = new SplitText(textElement, {type: 'chars'}); // Comment this out to avoid trial error
 
 const gridFull = document.querySelector('.grid--full'); // Select the full grid container
 
@@ -97,7 +96,7 @@ const animateTextElement = () => {
     }
   })
   .from(textElement, {
-    // Animate the text as a whole if SplitText is not being used
+    // Animate the text as a whole (instead of using SplitText)
     ease: 'sine',
     yPercent: 300,                       // Move the text from below the viewport
     autoAlpha: 0,                        // Start with opacity 0
@@ -149,10 +148,7 @@ const animateGridFull = () => {
 
 const animateCredits = () => {
   creditsTexts.forEach(creditsText => {
-    // Commented out SplitText for credits text
-    // const splitCredits = new SplitText(creditsText, { type: 'chars' }); // Split each credits text into characters
-
-    // GSAP timeline for the credits animation
+    // GSAP timeline for the credits animation (no SplitText)
     gsap.timeline({
       scrollTrigger: {
         trigger: creditsText,              // Trigger when the credits text enters the viewport
