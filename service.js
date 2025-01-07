@@ -8,7 +8,7 @@ const gridImages = grid.querySelectorAll('.grid__item-imgwrap'); // Select all e
 const marqueeInner = document.querySelector('.mark > .mark__inner'); // Select the inner element of the marquee
 
 const textElement = document.querySelector('.text'); // Select the text element
-var splitTextEl = new SplitText(textElement, {type: 'chars'}); // Split the text into individual characters for animation
+//var splitTextEl = new SplitText(textElement, {type: 'chars'}); // Split the text into individual characters for animation
 
 const gridFull = document.querySelector('.grid--full'); // Select the full grid container
 
@@ -155,7 +155,7 @@ const animateGridFull = () => {
 
 const animateCredits = () => {
   creditsTexts.forEach(creditsText => {
-    const splitCredits = new SplitText(creditsText, { type: 'chars' }); // Split each credits text into characters
+ //   const splitCredits = new SplitText(creditsText, { type: 'chars' }); // Split each credits text into characters
 
     // GSAP timeline for the credits animation
     gsap.timeline({
