@@ -1,7 +1,6 @@
 import { preloadImages } from './utils.js'; // Import utility function to preload images
 
-gsap.registerPlugin(ScrollTrigger); // Register GSAP's ScrollTrigger plugin
-gsap.registerPlugin(SplitText);     // Register GSAP's SplitText plugin
+
 
 const grid = document.querySelector('.grid'); // Select the container that holds all grid items
 const gridImages = grid.querySelectorAll('.grid__item-imgwrap'); // Select all elements with the class '.grid__item-imgwrap'
