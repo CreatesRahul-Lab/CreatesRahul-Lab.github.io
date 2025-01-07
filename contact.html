@@ -91,6 +91,7 @@
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            margin-left: -10px;
         }
 
         textarea {
@@ -139,48 +140,57 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
+
+         /* Media Queries for Mobile Responsiveness */
+         @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .form-section, .image-section {
+                min-width: 100%;
+                margin-bottom: 20px;
+            }
+
+            nav div {
+                margin-left: 0;
+                font-size: 20px;
+            }
+        }
+
+        .image-section {
+                display: none;  /* Hide image on mobile */
+            }
+
+        @media (max-width: 480px) {
+            nav div {
+                font-size: 18px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            input, textarea {
+                font-size: 14px;
+                margin-left: -10px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+        }
+        
+          footer{
+            margin-top: 220px;
+        }
+
+
+        
     </style>
 </head>
 <body>
-<?php
-session_start();
-
-// Process form submission
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = htmlspecialchars($_POST['name']);
-    $email = htmlspecialchars($_POST['email']);
-    $phone = htmlspecialchars($_POST['phone']);
-    $message = htmlspecialchars($_POST['message']);
-
-    // Database connection variables
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "palm";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Insert data into the database
-    $stmt = $conn->prepare("INSERT INTO contacts (name, email, phone, message) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $name, $email, $phone, $message);
-
-    if ($stmt->execute()) {
-        $_SESSION['success_message'] = "Message sent successfully!";
-        header("Refresh: 3; URL=index.html");
-    } else {
-        $_SESSION['error_message'] = "Error: " . $stmt->error;
-    }
-
-    $stmt->close();
-    $conn->close();
-}
-?>
 
 <nav>
     <div>RekhaSutra</div>
